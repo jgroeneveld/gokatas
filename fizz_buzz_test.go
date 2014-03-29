@@ -8,12 +8,11 @@ import (
 func Test(t *testing.T) { TestingT(t) }
 
 type FizzBuzzSuite struct{}
-var _ = Suite(&FizzBuzzSuite{})
 
 func (s *FizzBuzzSuite) Test_FizzBuzzLength(c *C) {
 	result := FizzBuzz()
 
-	c.Check(len(result), Equals,100)
+	c.Check(len(result), Equals, 100)
 }
 
 func (s *FizzBuzzSuite) Test_FizzBuzzContents(c *C) {
@@ -24,3 +23,5 @@ func (s *FizzBuzzSuite) Test_FizzBuzzContents(c *C) {
 	c.Check(result[:7], DeepEquals, expectedStart)
 	c.Check(result[13:16], DeepEquals, expectedMid)
 }
+
+var _ = Suite(&FizzBuzzSuite{})
