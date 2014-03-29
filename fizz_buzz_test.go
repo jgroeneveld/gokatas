@@ -1,27 +1,24 @@
 package gokatas
 
 import (
-	"testing"
-	. "launchpad.net/gocheck"
+	gc "launchpad.net/gocheck"
 )
-
-func Test(t *testing.T) { TestingT(t) }
 
 type FizzBuzzSuite struct{}
 
-func (s *FizzBuzzSuite) Test_FizzBuzzLength(c *C) {
+func (s *FizzBuzzSuite) Test_Length(c *gc.C) {
 	result := FizzBuzz()
 
-	c.Check(len(result), Equals, 100)
+	c.Check(len(result), gc.Equals, 100)
 }
 
-func (s *FizzBuzzSuite) Test_FizzBuzzContents(c *C) {
+func (s *FizzBuzzSuite) Test_Contents(c *gc.C) {
 	result := FizzBuzz()
 	expectedStart := []string{"1", "2", "Fizz", "4", "Buzz", "Fizz", "7"}
 	expectedMid := []string{"14", "FizzBuzz", "16"}
 
-	c.Check(result[:7], DeepEquals, expectedStart)
-	c.Check(result[13:16], DeepEquals, expectedMid)
+	c.Check(result[:7], gc.DeepEquals, expectedStart)
+	c.Check(result[13:16], gc.DeepEquals, expectedMid)
 }
 
-var _ = Suite(&FizzBuzzSuite{})
+var _ = gc.Suite(&FizzBuzzSuite{})
