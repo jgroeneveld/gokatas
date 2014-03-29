@@ -2,7 +2,6 @@ package gokatas
 
 import "strconv"
 
-// http://de.scribd.com/doc/140817312/Function-Kata-FizzBuzz
 func FizzBuzz() []string {
 	result := make([]string, 100)
 

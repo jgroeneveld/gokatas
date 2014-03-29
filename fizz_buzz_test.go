@@ -4,6 +4,7 @@ import (
 	gc "launchpad.net/gocheck"
 )
 
+// http://de.scribd.com/doc/140817312/Function-Kata-FizzBuzz
 type FizzBuzzSuite struct{}
 
 func (s *FizzBuzzSuite) Test_Length(c *gc.C) {
