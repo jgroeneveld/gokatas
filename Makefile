@@ -1,11 +1,9 @@
-default: test
+default: all
 
-package = github.com/jgroeneveld/gokatas
+.PHONY: default all format fizz_buzz roman_numerals happy_numbers
 
-.PHONY: default test format fizz_buzz roman_numerals happy_numbers
-
-test:
-	go test $(package)/...
+all:
+	go test
 
 fizz_buzz:
 	go test -gocheck.f "FizzBuzz*"
@@ -15,6 +13,9 @@ roman_numerals:
 
 happy_numbers:
 	go test -gocheck.f "HappyNumbers*"
+
+loc:
+	go test -gocheck.f "LOC*"
 
 format:
 	goimports -w .
