@@ -50,5 +50,4 @@ func (s *HappyNumbersSuite) Test_sumOfSquaresOfDigits(c *gc.C) {
 	}
 }
 
-
 var _ = gc.Suite(&HappyNumbersSuite{})

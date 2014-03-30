@@ -39,7 +39,7 @@ func getCommentsLOC(code string) int {
 
 	findEnd := false
 
-	for _, line := range strings.Split(code, "\n"){
+	for _, line := range strings.Split(code, "\n") {
 		if findEnd {
 			count++
 			if endsCodeBlock.MatchString(line) {
