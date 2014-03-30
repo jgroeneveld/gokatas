@@ -1,6 +1,6 @@
 default: all
 
-.PHONY: default all format fizz_buzz roman_numerals happy_numbers
+.PHONY: default all format fizz_buzz roman_numerals happy_numbers coverage
 
 all:
 	go test
@@ -16,6 +16,9 @@ happy_numbers:
 
 loc:
 	go test -gocheck.f "LOC*"
+
+coverage:
+	go test -test.coverprofile=/tmp/cov.out && go tool cover -html=/tmp/cov.out
 
 format:
 	goimports -w .

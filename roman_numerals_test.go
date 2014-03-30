@@ -8,6 +8,8 @@ import (
 type RomanNumeralsSuite struct{}
 
 func (s *RomanNumeralsSuite) Test_FromRomanNumerals(c *gc.C) {
+	c.Skip("Not yet implemented")
+
 	tests := []struct {
 		in  string
 		out int
@@ -29,6 +31,7 @@ func (s *RomanNumeralsSuite) Test_FromRomanNumerals(c *gc.C) {
 }
 
 func (s *RomanNumeralsSuite) Test_IsValidRomanNumeral(c *gc.C) {
+	c.Skip("Not yet implemented")
 	tests := []struct {
 		in  string
 		out bool
