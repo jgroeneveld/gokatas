@@ -12,3 +12,5 @@ Running tests for the Katas:
     make fizz_buzz
          roman_numerals
          happy_numbers
+         loc
+         rot13

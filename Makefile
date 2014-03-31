@@ -17,6 +17,9 @@ happy_numbers:
 loc:
 	go test -gocheck.f "LOC*"
 
+rot13:
+	go test -gocheck.f "ROT13*"
+
 coverage:
 	go test -test.coverprofile=/tmp/cov.out && go tool cover -html=/tmp/cov.out
 
