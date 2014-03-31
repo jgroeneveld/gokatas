@@ -14,3 +14,4 @@ Running tests for the Katas:
          happy_numbers
          loc
          rot13
+         dictionary

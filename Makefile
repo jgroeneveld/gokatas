@@ -20,6 +20,9 @@ loc:
 rot13:
 	go test -gocheck.f "ROT13*"
 
+dictionary:
+	go test -gocheck.f "Dictionary*"
+
 coverage:
 	go test -test.coverprofile=/tmp/cov.out && go tool cover -html=/tmp/cov.out
 
