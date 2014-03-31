@@ -42,14 +42,15 @@ func (s *RomanNumeralsSuite) Test_FromRomanNumeralsSubtraction(c *gc.C) {
 }
 
 func (s *RomanNumeralsSuite) Test_IsValidRomanNumeral(c *gc.C) {
-	c.Skip("Not yet implemented")
 	tests := []struct {
 		in  string
 		out bool
 	}{
 		{"I", true},
 		{"XCIX", true},
-		{"I I", false}, // syntactic
+		{"I I", false}, // syntactic error
+		{"I,I", false},
+		{"IAI", false},
 		{"IC", false},  // semantic error
 	}
 

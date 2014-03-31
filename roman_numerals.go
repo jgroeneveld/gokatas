@@ -1,8 +1,6 @@
 package gokatas
 
-import (
-	"strings"
-)
+import "strings"
 
 func FromRomanNumerals(roman string) int {
 	roman, subSum := romanSumForMap(roman, romanSubtractionValues())
@@ -12,6 +10,49 @@ func FromRomanNumerals(roman string) int {
 }
 
 func IsvalidRomanNumeral(roman string) bool {
+	roman = removeSubtractionalNumerals(roman)
+
+	if !isValidRomanNumeralSyntactically(roman) {
+		return false
+	}
+
+	return isValidRomanNumeralSemantically(roman)
+}
+
+func removeSubtractionalNumerals(roman string) string {
+	roman, _ = romanSumForMap(roman, romanSubtractionValues())
+	return roman
+}
+
+func isValidRomanNumeralSyntactically(roman string) bool {
+	for _, r := range roman {
+		if !isValidRomanRune(r) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func isValidRomanRune(r rune) bool {
+	return romanAdditionValues()[string(r)] != 0
+}
+
+func isValidRomanNumeralSemantically(roman string) bool {
+	numbers := make([]int, len(roman))
+	for i, r := range roman {
+		number := romanAdditionValues()[string(r)]
+		numbers[i] = number
+	}
+
+	last := 9999
+	for _, n := range numbers {
+		if n > last {
+			return false
+		}
+		last = n
+	}
+
 	return true
 }
 
