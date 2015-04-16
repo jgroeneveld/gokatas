@@ -1,25 +1,23 @@
 package gokatas
 
 import (
-	gc "launchpad.net/gocheck"
+	"testing"
+
+	"github.com/heroku/hk/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 // http://de.scribd.com/doc/140817312/Function-Kata-FizzBuzz
-type FizzBuzzSuite struct{}
-
-func (s *FizzBuzzSuite) Test_Length(c *gc.C) {
+func TestFizzBuzz_Length(t *testing.T) {
 	result := FizzBuzz()
 
-	c.Check(len(result), gc.Equals, 100)
+	assert.Equal(t, 100, len(result))
 }
 
-func (s *FizzBuzzSuite) Test_Contents(c *gc.C) {
+func TestFizzBuzz_Contents(t *testing.T) {
 	result := FizzBuzz()
 	expectedStart := []string{"1", "2", "Fizz", "4", "Buzz", "Fizz", "7"}
 	expectedMid := []string{"14", "FizzBuzz", "16"}
 
-	c.Check(result[:7], gc.DeepEquals, expectedStart)
-	c.Check(result[13:16], gc.DeepEquals, expectedMid)
+	assert.Equal(t, expectedStart, result[:7])
+	assert.Equal(t, expectedMid, result[13:16])
 }
-
-var _ = gc.Suite(&FizzBuzzSuite{})

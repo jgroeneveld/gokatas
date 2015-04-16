@@ -1,13 +1,13 @@
 package gokatas
 
 import (
-	gc "launchpad.net/gocheck"
+	"testing"
+
+	"github.com/heroku/hk/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 // http://de.scribd.com/doc/142257204/Function-Kata-Fro%CC%88hliche-Zahlen
-type HappyNumbersSuite struct{}
-
-func (s *HappyNumbersSuite) Test_IsHappyNumber(c *gc.C) {
+func TestIsHappyNumber(t *testing.T) {
 	tests := []struct {
 		in  int
 		out bool
@@ -22,17 +22,16 @@ func (s *HappyNumbersSuite) Test_IsHappyNumber(c *gc.C) {
 	}
 
 	for _, test := range tests {
-		c.Check(IsHappyNumber(test.in), gc.Equals, test.out,
-			gc.Commentf("for input %d", test.in))
+		assert.Equal(t, test.out, IsHappyNumber(test.in), "for %s", test.in)
 	}
 }
 
-func (s *HappyNumbersSuite) Test_CalculateHappyNumbers(c *gc.C) {
-	c.Check(CalculateHappyNumbers(5, 20), gc.DeepEquals, []int{7, 10, 13, 19})
-	c.Check(CalculateHappyNumbers(13, 44), gc.DeepEquals, []int{13, 19, 23, 28, 31, 32, 44})
+func TestCalculateHappyNumbers(t *testing.T) {
+	assert.Equal(t, []int{7, 10, 13, 19}, CalculateHappyNumbers(5, 20))
+	assert.Equal(t, []int{13, 19, 23, 28, 31, 32, 44}, CalculateHappyNumbers(13, 44))
 }
 
-func (s *HappyNumbersSuite) Test_sumOfSquaresOfDigits(c *gc.C) {
+func Test_sumOfSquaresOfDigits(t *testing.T) {
 	tests := []struct {
 		in  string
 		out int
@@ -45,9 +44,6 @@ func (s *HappyNumbersSuite) Test_sumOfSquaresOfDigits(c *gc.C) {
 	}
 
 	for _, test := range tests {
-		c.Check(sumOfSquaresOfDigits(test.in), gc.Equals, test.out,
-			gc.Commentf("for input %s", test.in))
+		assert.Equal(t, test.out, sumOfSquaresOfDigits(test.in), "for %s", test.in)
 	}
 }
-
-var _ = gc.Suite(&HappyNumbersSuite{})

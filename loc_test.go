@@ -1,10 +1,12 @@
 package gokatas
 
-import gc "launchpad.net/gocheck"
+import (
+	"testing"
 
-type LOCSuite struct{}
+	"github.com/stretchr/testify/assert"
+)
 
-func (s *LOCSuite) Test_GetLOC(c *gc.C) {
+func TestGetLOC(t *testing.T) {
 	codeToTest := `/* this is the code to test
 the first lines are a documentation comment
 */
@@ -16,16 +18,15 @@ func name(params) int {
 }`
 
 	loc := GetLOC(codeToTest)
-
-	c.Check(loc, gc.Equals, LOCData{
+	assert.Equal(t, LOCData{
 		Total:      9,
 		Code:       3,
 		Comments:   5,
 		Whitespace: 1,
-	})
+	}, loc)
 }
 
-func (s *LOCSuite) Test_stripLines(c *gc.C) {
+func TestStripLines(t *testing.T) {
 	unstripped := `first
   second
      further in
@@ -36,15 +37,14 @@ second
 further in
 third`
 
-	c.Check(stripLines(unstripped), gc.Equals, stripped)
+	assert.Equal(t, stripped, stripLines(unstripped))
 }
 
-func (s *LOCSuite) Test_isWhitespaceLine(c *gc.C) {
-	c.Check(isWhitespaceLine(""), gc.Equals, true)
-	c.Check(isWhitespaceLine("   "), gc.Equals, true)
-	c.Check(isWhitespaceLine("	"), gc.Equals, true)
-	c.Check(isWhitespaceLine("	//"), gc.Equals, false)
-	c.Check(isWhitespaceLine("x	//"), gc.Equals, false)
+func TestIsWhitespaceLine(t *testing.T) {
+	assert := assert.New(t)
+	assert.True(isWhitespaceLine(""))
+	assert.True(isWhitespaceLine("   "))
+	assert.True(isWhitespaceLine("	"))
+	assert.False(isWhitespaceLine("	//"))
+	assert.False(isWhitespaceLine("x	//"))
 }
-
-var _ = gc.Suite(&LOCSuite{})

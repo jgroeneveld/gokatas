@@ -2,14 +2,15 @@ package gokatas
 
 import (
 	"errors"
+	"testing"
 
-	gc "launchpad.net/gocheck"
+	"github.com/stretchr/testify/assert"
 )
 
-type DictionarySuite struct{}
-
 // http://de.scribd.com/doc/141109135/Function-Kata-ToDictionary
-func (s *DictionarySuite) Test_ToDictionary(c *gc.C) {
+func TestToDictionary(t *testing.T) {
+	assert := assert.New(t)
+
 	tests := []struct {
 		in  string
 		out Dictionary
@@ -26,12 +27,7 @@ func (s *DictionarySuite) Test_ToDictionary(c *gc.C) {
 	for _, test := range tests {
 		dict, err := ToDictionary(test.in)
 
-		c.Check(dict, gc.DeepEquals, test.out,
-			gc.Commentf("for input %s", test.in))
-
-		c.Check(err, gc.DeepEquals, test.err,
-			gc.Commentf("for input %s", test.in))
+		assert.Equal(test.out, dict, "for %q", test.in)
+		assert.Equal(test.err, err, "for %q", test.in)
 	}
 }
-
-var _ = gc.Suite(&DictionarySuite{})

@@ -1,13 +1,13 @@
 package gokatas
 
 import (
-	gc "launchpad.net/gocheck"
+	"testing"
+
+	"github.com/heroku/hk/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 // http://de.scribd.com/doc/140927641/Function-Kata-From-Roman-Numerals
-type RomanNumeralsSuite struct{}
-
-func (s *RomanNumeralsSuite) Test_FromRomanNumeralsAddition(c *gc.C) {
+func TestFromRomanNumerals_Addition(t *testing.T) {
 	tests := []struct {
 		in  string
 		out int
@@ -19,12 +19,11 @@ func (s *RomanNumeralsSuite) Test_FromRomanNumeralsAddition(c *gc.C) {
 	}
 
 	for _, test := range tests {
-		c.Check(FromRomanNumerals(test.in), gc.Equals, test.out,
-			gc.Commentf("for input '%s'", test.in))
+		assert.Equal(t, test.out, FromRomanNumerals(test.in), "for %q", test.in)
 	}
 }
 
-func (s *RomanNumeralsSuite) Test_FromRomanNumeralsSubtraction(c *gc.C) {
+func TestFromRomanNumerals_Subtraction(t *testing.T) {
 	tests := []struct {
 		in  string
 		out int
@@ -36,12 +35,11 @@ func (s *RomanNumeralsSuite) Test_FromRomanNumeralsSubtraction(c *gc.C) {
 	}
 
 	for _, test := range tests {
-		c.Check(FromRomanNumerals(test.in), gc.Equals, test.out,
-			gc.Commentf("for input '%s'", test.in))
+		assert.Equal(t, test.out, FromRomanNumerals(test.in), "for %q", test.in)
 	}
 }
 
-func (s *RomanNumeralsSuite) Test_IsValidRomanNumeral(c *gc.C) {
+func TestIsValidRomanNumeral(t *testing.T) {
 	tests := []struct {
 		in  string
 		out bool
@@ -51,13 +49,10 @@ func (s *RomanNumeralsSuite) Test_IsValidRomanNumeral(c *gc.C) {
 		{"I I", false}, // syntactic error
 		{"I,I", false},
 		{"IAI", false},
-		{"IC", false},  // semantic error
+		{"IC", false}, // semantic error
 	}
 
 	for _, test := range tests {
-		c.Check(IsvalidRomanNumeral(test.in), gc.Equals, test.out,
-			gc.Commentf("for input '%s'", test.in))
+		assert.Equal(t, test.out, IsvalidRomanNumeral(test.in), "for %q", test.in)
 	}
 }
-
-var _ = gc.Suite(&RomanNumeralsSuite{})
