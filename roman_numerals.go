@@ -9,7 +9,7 @@ func FromRomanNumerals(roman string) int {
 	return subSum + addSum
 }
 
-func IsvalidRomanNumeral(roman string) bool {
+func IsValidRomanNumeral(roman string) bool {
 	roman = removeSubtractionalNumerals(roman)
 
 	if !isValidRomanNumeralSyntactically(roman) {

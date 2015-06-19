@@ -4,30 +4,31 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/jgroeneveld/trial/assert"
 )
 
 // http://de.scribd.com/doc/141109135/Function-Kata-ToDictionary
 func TestToDictionary(t *testing.T) {
-	assert := assert.New(t)
+	dict, err := ToDictionary("a=1;b=2;c=3")
+	assert.Nil(t, err)
+	assert.DeepEqual(t, Dictionary{"a": "1", "b": "2", "c": "3"}, dict)
 
-	tests := []struct {
-		in  string
-		out Dictionary
-		err error
-	}{
-		{"a=1;b=2;c=3", Dictionary{"a": "1", "b": "2", "c": "3"}, nil},
-		{"a=1;a=2", Dictionary{"a": "2"}, nil},
-		{"a=", Dictionary{"a": ""}, nil},
-		{"=1", nil, errors.New("Invalid Input")},
-		{"", Dictionary{}, nil},
-		{"a==1", Dictionary{"a": "=1"}, nil},
-	}
+	dict, err = ToDictionary("a=1;a=2")
+	assert.Nil(t, err)
+	assert.DeepEqual(t, Dictionary{"a": "2"}, dict)
 
-	for _, test := range tests {
-		dict, err := ToDictionary(test.in)
+	dict, err = ToDictionary("a=")
+	assert.Nil(t, err)
+	assert.DeepEqual(t, Dictionary{"a": ""}, dict)
 
-		assert.Equal(test.out, dict, "for %q", test.in)
-		assert.Equal(test.err, err, "for %q", test.in)
-	}
+	dict, err = ToDictionary("")
+	assert.Nil(t, err)
+	assert.DeepEqual(t, Dictionary{}, dict)
+
+	dict, err = ToDictionary("a==1")
+	assert.Nil(t, err)
+	assert.DeepEqual(t, Dictionary{"a": "=1"}, dict)
+
+	dict, err = ToDictionary("=1")
+	assert.DeepEqual(t, errors.New("Invalid Input"), err)
 }

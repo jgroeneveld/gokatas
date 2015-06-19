@@ -1,9 +1,8 @@
 package gokatas
 
 import (
+	"github.com/jgroeneveld/trial/assert"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestGetLOC(t *testing.T) {
@@ -18,7 +17,7 @@ func name(params) int {
 }`
 
 	loc := GetLOC(codeToTest)
-	assert.Equal(t, LOCData{
+	assert.DeepEqual(t, LOCData{
 		Total:      9,
 		Code:       3,
 		Comments:   5,
@@ -41,10 +40,9 @@ third`
 }
 
 func TestIsWhitespaceLine(t *testing.T) {
-	assert := assert.New(t)
-	assert.True(isWhitespaceLine(""))
-	assert.True(isWhitespaceLine("   "))
-	assert.True(isWhitespaceLine("	"))
-	assert.False(isWhitespaceLine("	//"))
-	assert.False(isWhitespaceLine("x	//"))
+	assert.True(t, isWhitespaceLine(""))
+	assert.True(t, isWhitespaceLine("   "))
+	assert.True(t, isWhitespaceLine("	"))
+	assert.False(t, isWhitespaceLine("	//"))
+	assert.False(t, isWhitespaceLine("x	//"))
 }

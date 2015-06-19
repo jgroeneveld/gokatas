@@ -3,56 +3,29 @@ package gokatas
 import (
 	"testing"
 
-	"github.com/heroku/hk/Godeps/_workspace/src/github.com/stretchr/testify/assert"
+	"github.com/jgroeneveld/trial/assert"
 )
 
 // http://de.scribd.com/doc/140927641/Function-Kata-From-Roman-Numerals
 func TestFromRomanNumerals_Addition(t *testing.T) {
-	tests := []struct {
-		in  string
-		out int
-	}{
-		{"I", 1},
-		{"II", 2},
-		{"V", 5},
-		{"MMXIII", 2013},
-	}
-
-	for _, test := range tests {
-		assert.Equal(t, test.out, FromRomanNumerals(test.in), "for %q", test.in)
-	}
+	assert.Equal(t, 1, FromRomanNumerals("I"))
+	assert.Equal(t, 2, FromRomanNumerals("II"))
+	assert.Equal(t, 5, FromRomanNumerals("V"))
+	assert.Equal(t, 2013, FromRomanNumerals("MMXIII"))
 }
 
 func TestFromRomanNumerals_Subtraction(t *testing.T) {
-	tests := []struct {
-		in  string
-		out int
-	}{
-		{"IV", 4},
-		{"IX", 9},
-		{"XLII", 42},
-		{"XCIX", 99},
-	}
-
-	for _, test := range tests {
-		assert.Equal(t, test.out, FromRomanNumerals(test.in), "for %q", test.in)
-	}
+	assert.Equal(t, 4, FromRomanNumerals("IV"))
+	assert.Equal(t, 9, FromRomanNumerals("IX"))
+	assert.Equal(t, 42, FromRomanNumerals("XLII"))
+	assert.Equal(t, 99, FromRomanNumerals("XCIX"))
 }
 
 func TestIsValidRomanNumeral(t *testing.T) {
-	tests := []struct {
-		in  string
-		out bool
-	}{
-		{"I", true},
-		{"XCIX", true},
-		{"I I", false}, // syntactic error
-		{"I,I", false},
-		{"IAI", false},
-		{"IC", false}, // semantic error
-	}
-
-	for _, test := range tests {
-		assert.Equal(t, test.out, IsvalidRomanNumeral(test.in), "for %q", test.in)
-	}
+	assert.True(t, IsValidRomanNumeral("I"))
+	assert.True(t, IsValidRomanNumeral("XCIX"))
+	assert.False(t, IsValidRomanNumeral("I I"), "treating syntactic error as valid")
+	assert.False(t, IsValidRomanNumeral("I,I"))
+	assert.False(t, IsValidRomanNumeral("IAI"))
+	assert.False(t, IsValidRomanNumeral("IC"), "treating semantic error as valid")
 }
